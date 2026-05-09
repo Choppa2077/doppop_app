@@ -1,11 +1,13 @@
 import { Stack } from 'expo-router';
 
+import { colors } from '../../src/theme';
+
 export default function OnboardingLayout() {
   return (
     <Stack
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: '#FAFAF7' },
+        contentStyle: { backgroundColor: colors.bg },
       }}
     />
   );
