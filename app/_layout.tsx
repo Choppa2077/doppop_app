@@ -16,7 +16,8 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Toaster } from 'sonner-native';
+
+import { Toaster } from '../src/components/Toaster';
 
 import { useAuthStore } from '../src/stores/authStore';
 
@@ -68,7 +69,7 @@ export default function RootLayout() {
             <Stack.Screen name="(onboarding)" />
             <Stack.Screen name="(tabs)" />
           </Stack>
-          <Toaster position="top-center" />
+          <Toaster />
         </SafeAreaProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

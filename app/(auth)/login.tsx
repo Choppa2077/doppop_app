@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { toast } from 'sonner-native';
+import { toast } from '../../src/utils/toast';
 
 import { login } from '../../src/api/auth';
 import { isApiError } from '../../src/api/client';

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { toast } from 'sonner-native';
+import { toast } from '../../src/utils/toast';
 
 import { isApiError } from '../../src/api/client';
 import { qk } from '../../src/api/keys';

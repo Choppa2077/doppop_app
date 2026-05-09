@@ -4,12 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colors, text } from '../../src/theme';
 
-export default function LobbiesPlaceholder() {
+export default function VenuesPlaceholder() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
       <View style={{ flex: 1, padding: 20, gap: 16 }}>
         <Text style={[text.display, { color: colors.textPrimary }]}>
-          Lobbies
+          Venues
         </Text>
         <View
           style={{
@@ -29,10 +29,14 @@ export default function LobbiesPlaceholder() {
               justifyContent: 'center',
             }}
           >
-            <Ionicons name="people-outline" size={36} color={colors.accent} />
+            <Ionicons
+              name="location-outline"
+              size={36}
+              color={colors.accent}
+            />
           </View>
           <Text style={[text.h2, { color: colors.textPrimary }]}>
-            Coming in step 8
+            Coming in step 6
           </Text>
           <Text
             style={[
@@ -44,8 +48,8 @@ export default function LobbiesPlaceholder() {
               },
             ]}
           >
-            Active lobbies and the open feed will land here once venues +
-            create are wired up.
+            Browse venues, see open slots, and start a lobby straight from
+            here.
           </Text>
         </View>
       </View>

@@ -23,6 +23,25 @@ export async function updateMe(input: MeUpdateInput): Promise<User> {
   return res.data;
 }
 
+export async function uploadAvatar(asset: {
+  uri: string;
+  fileName?: string | null;
+  mimeType?: string | null;
+}): Promise<User> {
+  const form = new FormData();
+  // React Native FormData accepts this object shape for file fields.
+  form.append('avatar', {
+    uri: asset.uri,
+    name: asset.fileName ?? 'avatar.jpg',
+    type: asset.mimeType ?? 'image/jpeg',
+    // RN FormData typing is loose; cast for TS.
+  } as unknown as Blob);
+  const res = await api.post<User>('/me/avatar/', form, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return res.data;
+}
+
 export async function putParameters(
   inputs: ParameterUpsertInput[],
 ): Promise<UserParameter[]> {

@@ -37,7 +37,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 
   clearTokens: async () => {
-    await Promise.all([
+    await Promise.allSettled([
       SecureStore.deleteItemAsync(ACCESS_KEY),
       SecureStore.deleteItemAsync(REFRESH_KEY),
     ]);
