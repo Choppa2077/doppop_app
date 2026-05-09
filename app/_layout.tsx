@@ -74,6 +74,10 @@ export default function RootLayout() {
               options={{ presentation: 'modal' }}
             />
             <Stack.Screen name="lobbies/[id]" />
+            <Stack.Screen
+              name="lobbies/filters"
+              options={{ presentation: 'modal' }}
+            />
             <Stack.Screen name="profile/edit" />
           </Stack>
           <Toaster />
