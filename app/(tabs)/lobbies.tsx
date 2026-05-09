@@ -161,9 +161,10 @@ export default function LobbiesScreen() {
             </View>
           </View>
         }
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <LobbyCard
             lobby={item}
+            index={index}
             onPress={() => router.push(`/lobbies/${item.id}`)}
           />
         )}

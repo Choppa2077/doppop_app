@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, Text, View } from 'react-native';
 import Animated, {
+  FadeInDown,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -18,9 +19,10 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 type LobbyCardProps = {
   lobby: LobbyListItem;
   onPress?: () => void;
+  index?: number;
 };
 
-export function LobbyCard({ lobby, onPress }: LobbyCardProps) {
+export function LobbyCard({ lobby, onPress, index = 0 }: LobbyCardProps) {
   const scale = useSharedValue(1);
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
@@ -42,6 +44,7 @@ export function LobbyCard({ lobby, onPress }: LobbyCardProps) {
       onPressOut={() => {
         scale.value = withSpring(1, { mass: 0.4, stiffness: 220 });
       }}
+      entering={FadeInDown.delay(index * 30).duration(280)}
       style={[
         {
           backgroundColor: colors.surface,

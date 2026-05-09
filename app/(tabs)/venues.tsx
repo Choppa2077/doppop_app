@@ -128,9 +128,10 @@ export default function VenuesScreen() {
             paddingBottom: 24,
             gap: 16,
           }}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <VenueCard
               venue={item}
+              index={index}
               onPress={() => router.push(`/venues/${item.id}`)}
             />
           )}

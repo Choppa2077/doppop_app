@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { Pressable, Text, View } from 'react-native';
 import Animated, {
+  FadeInDown,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -18,9 +19,10 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 type VenueCardProps = {
   venue: Venue;
   onPress?: () => void;
+  index?: number;
 };
 
-export function VenueCard({ venue, onPress }: VenueCardProps) {
+export function VenueCard({ venue, onPress, index = 0 }: VenueCardProps) {
   const scale = useSharedValue(1);
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
@@ -37,6 +39,7 @@ export function VenueCard({ venue, onPress }: VenueCardProps) {
       onPressOut={() => {
         scale.value = withSpring(1, { mass: 0.4, stiffness: 220 });
       }}
+      entering={FadeInDown.delay(index * 30).duration(280)}
       style={[
         {
           backgroundColor: colors.surface,
