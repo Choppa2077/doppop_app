@@ -14,6 +14,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Card } from '../../src/components/Card';
+import { CreateLobbySheet } from '../../src/components/CreateLobbySheet';
 import { EmptyState } from '../../src/components/EmptyState';
 import { RatingPill } from '../../src/components/RatingPill';
 import { Skeleton } from '../../src/components/Skeleton';
@@ -39,6 +40,7 @@ export default function VenueDetailsScreen() {
   const today = useMemo(() => new Date(), []);
   const days = useMemo(() => buildNextDays(14, today), [today]);
   const [selectedDate, setSelectedDate] = useState<string>(isoDateOnly(today));
+  const [createForSlot, setCreateForSlot] = useState<TimeSlot | null>(null);
 
   const slotsQuery = useVenueSlots(venueId, selectedDate);
 
@@ -390,10 +392,7 @@ export default function VenueDetailsScreen() {
                   <SlotRow
                     key={slot.id}
                     slot={slot}
-                    onPress={() => {
-                      // Lobby creation lands in step 7. For now, just no-op
-                      // on free slots; taken/blocked slots stay disabled.
-                    }}
+                    onPress={() => setCreateForSlot(slot)}
                   />
                 ))}
               </View>
@@ -401,6 +400,13 @@ export default function VenueDetailsScreen() {
           </View>
         </View>
       </ScrollView>
+      <CreateLobbySheet
+        visible={createForSlot !== null}
+        onClose={() => setCreateForSlot(null)}
+        slot={createForSlot}
+        venueName={venue.name}
+        venueId={venue.id}
+      />
     </View>
   );
 }

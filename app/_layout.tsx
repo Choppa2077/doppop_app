@@ -73,6 +73,7 @@ export default function RootLayout() {
               name="venues/filters"
               options={{ presentation: 'modal' }}
             />
+            <Stack.Screen name="lobbies/[id]" />
             <Stack.Screen name="profile/edit" />
           </Stack>
           <Toaster />
