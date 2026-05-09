@@ -25,7 +25,7 @@ import { colors, radii, text } from '../../src/theme';
 import type { TimeSlot } from '../../src/types/api';
 import {
   buildNextDays,
-  formatDayLabel,
+  formatDayLabelCompact,
   formatPrice,
   formatTimeRange,
   isoDateOnly,
@@ -336,7 +336,7 @@ export default function VenueDetailsScreen() {
                         },
                       ]}
                     >
-                      {formatDayLabel(d, today)}
+                      {formatDayLabelCompact(d, today)}
                     </Text>
                     <Text
                       style={[

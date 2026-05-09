@@ -61,6 +61,14 @@ export function formatDayLabel(date: Date, today = new Date()) {
   return WEEKDAYS_SHORT[date.getDay()];
 }
 
+// Compact variant for narrow chips. "Tomorrow" wraps in a 64px chip; "Tmrw"
+// keeps the rhythm with the 3-letter weekdays.
+export function formatDayLabelCompact(date: Date, today = new Date()) {
+  if (isSameDay(date, today)) return 'Today';
+  if (isTomorrow(date, today)) return 'Tmrw';
+  return WEEKDAYS_SHORT[date.getDay()];
+}
+
 export function formatLongDate(date: Date) {
   return `${WEEKDAYS_LONG[date.getDay()]}, ${date.getDate()} ${
     MONTHS_SHORT[date.getMonth()]
