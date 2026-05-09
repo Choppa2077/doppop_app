@@ -1,30 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default function Home() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>doppop</Text>
-      <Text style={styles.subtitle}>expo-router is wired up</Text>
+    <View className="flex-1 items-center justify-center bg-bg px-6">
+      <View className="rounded-lg bg-accent-soft px-3 py-1.5 mb-3">
+        <Text className="text-accent text-xs font-bold uppercase tracking-wider">
+          nativewind ready
+        </Text>
+      </View>
+      <Text className="text-4xl font-bold text-text-primary mb-1">doppop</Text>
+      <Text className="text-base text-text-muted">tailwind classes are live</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FAFAF7',
-    paddingHorizontal: 24,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: '#0A0A0A',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#6B6B66',
-  },
-});
