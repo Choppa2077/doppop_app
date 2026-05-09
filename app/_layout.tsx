@@ -1,22 +1,35 @@
 import '../global.css';
+import 'react-native-gesture-handler';
+import 'react-native-reanimated';
 
-import { useFonts } from 'expo-font';
-import {
-  SpaceGrotesk_700Bold,
-} from '@expo-google-fonts/space-grotesk';
 import {
   DMSans_400Regular,
   DMSans_500Medium,
   DMSans_600SemiBold,
 } from '@expo-google-fonts/dm-sans';
+import { SpaceGrotesk_700Bold } from '@expo-google-fonts/space-grotesk';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Toaster } from 'sonner-native';
 
-SplashScreen.preventAutoHideAsync().catch(() => {
-  // ignore: splash already hidden
+import { useAuthStore } from '../src/stores/authStore';
+
+SplashScreen.preventAutoHideAsync().catch(() => {});
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 30_000,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
 });
 
 export default function RootLayout() {
@@ -27,20 +40,37 @@ export default function RootLayout() {
     DMSans_600SemiBold,
   });
 
+  const hydrate = useAuthStore((s) => s.hydrate);
+  const hydrated = useAuthStore((s) => s.hydrated);
+
   useEffect(() => {
-    if (fontsLoaded || fontsError) {
+    hydrate();
+  }, [hydrate]);
+
+  useEffect(() => {
+    if ((fontsLoaded || fontsError) && hydrated) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, fontsError]);
+  }, [fontsLoaded, fontsError, hydrated]);
 
-  if (!fontsLoaded && !fontsError) {
+  if ((!fontsLoaded && !fontsError) || !hydrated) {
     return null;
   }
 
   return (
-    <SafeAreaProvider>
-      <StatusBar style="dark" />
-      <Stack screenOptions={{ headerShown: false }} />
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>
+          <StatusBar style="dark" />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="(onboarding)" />
+            <Stack.Screen name="(tabs)" />
+          </Stack>
+          <Toaster position="top-center" />
+        </SafeAreaProvider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }
